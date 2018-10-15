@@ -53,3 +53,14 @@ INSTRUCTOR:
 When I did the assignment, I did the same thing; created the pthread when the user requested the time.
 
 Another way could be to create the pthread before the loop and then signal it using a semaphore whenever the user requests the time. A good resource on semaphores is The Little Book of Semaphores, available free online.
+
+Oct 13:
+Understanding pseudo code
+Could someone clarify the comment "Add this connection to the real variables" in the do wile loop of the AddRandomConnection function next to the line ConnectRoom(A,B)? 
+If I didn't have the pseudo code I might try to pass in an array of pointers to rooms to the AddRandomConnection() function so that it could add connections that way, but the pseudo code seems to be suggesting something else.  
+Instructor:
+What it means is that make sure you are modifying the actual room variable (be it a struct or an array), not the local version created in the function.
+
+Oct 14: 
+Getting and Matching User Input
+There is a note on comparing values.
