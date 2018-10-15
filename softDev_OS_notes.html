@@ -1,0 +1,55 @@
+Block 2: Piazza
+(I am showing the oldest questions first.)
+
+Oct 11
+Build rooms hint ERR 
+   From TA:
+As you said, it's pseudo code, not C code. (My summary: you don't have to use Bools, can use enums).
+That being said, bools are just 0 or 1 anyway. You could make an enum that behaves the same way. Or just return an int (which is the same as an enum in C).
+=========================
+
+Oct 12
+Path Taken, Number of Steps, and Dynamic Arrays 
+   From TA: 
+I'm not going to take points off if you hard code a set length for the number of steps taken. My code when I took this class had a cap at 1000 steps taken.
+Note: one of students suggested 100 steps
+=========================
+
+Array sizing for rooms.c
+If we are using global arrays of integers for each individual room how can we randomly size these rooms?  The directions say:
+
+FROM ASSIGNMENT: 
+"I highly recommend building up the room graph in this manner: adding outbound connections two at a time (forwards and backwards), to randomly chosen room endpoints, until the map of all the rooms satisfies the requirements listed above. It's easy, requires no backtracking, and tends to generate sparser layouts. As a warning, the alternate method of choosing the number of connections beforehand that each room will have is not recommended, as it's hard to make those chosen numbers match the constraints of the map." 
+
+STUDENT:
+I take this to mean that you should not pre-define how many connections the room will have for example by randomly sizing an array between 3 and 6.  Is this correct? If this is correct how are we supposed to randomly decide when each room connection is full between the values of 3 and 6? Or does it actually have to be random? could you cycle through adding connections to each room until there are at least 3 outbound connections in each room?
+
+TA:
+You could maintain a count of the number of connections and then check that count is at least 3 but not more than 6.
+=========================
+
+Oct 12
+Unused threads
+
+I had a loop that went like this:
+
+while game not done:
+    create_thread(tid) // pass locked mutex to thread, which attempts to lock it and is therefore blocked
+
+    if user inputs 'time':
+           unlock mutex
+           pthread_join(tid)   //block main thread until tid finishes
+           lock mutex
+     if thread went unused:
+           pthread_cancel(tid)
+
+If the user entered 'time' initially, no problem, but if the thread went unused, execution would get stuck at pthread_join the next time the 'time' command was entered. Like it was waiting for those unused threads that I thought were cleared out with pthread_cancel, but were hanging in limbo still locked. Without pthread_cancel, the program runs but leaks, as zombie processes must be lingering.
+
+I ended up putting the thread creation within the "if user inputs time" block to avoid the problem, but was initially trying to demonstrate the mutex usage a little more clearly by blocking the child thread well before using it. The lock is still there but it seems a little silly because I basically create the thread and then immediately unlock the mutex. Yes the child thread locks the mutex so nothing else can lock it, but I can't call lock immediately after in main because it will lock it faster than it takes to pass it in there in the first place! Hence, I need pthread_join to hold it (the main thread) out anyway. So it just seems a little trite, I guess.
+
+Anyway, the point is... is there a way around this? Anyone know where I am going wrong here?
+
+INSTRUCTOR:
+When I did the assignment, I did the same thing; created the pthread when the user requested the time.
+
+Another way could be to create the pthread before the loop and then signal it using a semaphore whenever the user requests the time. A good resource on semaphores is The Little Book of Semaphores, available free online.
