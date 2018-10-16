@@ -64,3 +64,102 @@ What it means is that make sure you are modifying the actual room variable (be i
 Oct 14: 
 Getting and Matching User Input
 There is a note on comparing values.
+
+Other Notes
+7 Rooms:
+
+bed_room: 		starting_room
+gold_room: 		end_room
+silver_room		mid_room
+bronze_room		mid_room
+ante_room		starting_room
+passage_room	mid_room
+pavilion_room	end_room
+
+For each room: 
+name: 
+type: starting_room, ending_room, mid_room
+connection_1:
+connection_2:
+connection_3:
+
+Use struct to define room {
+	name
+	type
+	# myNum: 1 - 7	// use randomizer to generate a random # 
+	connection_myNum
+}
+
+3 - 6 outbound connections:
+use if-then statement:
+if (x > 3 && x < 6) {
+}
+
+if rooms are randomly assigned to each other, then 
+
+
+time() {
+
+}
+
+Topics to look up:
+read input from keyboard
+string copy
+time 
+randomizer
+struct
+
+STRING COMPARISION
+#include <stdio.h>
+
+int main() {
+    char* name = "John";
+    
+    if (strncmp(name, "Joha", 3) == 0) {
+        printf("Hello, John!\n");
+    } else {
+        printf("You are not John. Go away.\n");
+    } 
+
+return 0;
+}
+
+#include <stdio.h>
+int main() {
+    char dest[20]="Hello";
+    char src[20]="World";
+    strncat(dest,src,3);
+    printf("%s\n",dest);
+    strncat(dest,src,20);
+    printf("%s\n",dest);
+return 0;
+}
+
+#include <stdio.h>
+
+int main() {
+  int n = 10;
+  int * pointer_to_n = &n;
+  *pointer_to_n += 1;
+  /* testing code */
+  if (pointer_to_n != &n) return 1;
+  if (*pointer_to_n != 11) return 1;
+  printf("Done!\n");
+  return 0;
+}
+
+
+#include <stdio.h>
+
+typedef struct {
+    char * name;
+    int age;
+} person;
+
+int main() {
+    person mary;
+    /* testing code */
+    mary.name = "Mary";
+    mary.age = 27;
+    printf("%s is %d years old.", mary.name, mary.age);
+}
