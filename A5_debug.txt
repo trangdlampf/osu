@@ -1,0 +1,30 @@
+   public void testManualTest()
+   {
+	   // testing Google URL without: / 
+	   public static final String[] MY_EMPTY_STRING_ARRAY1 = new String[0]; 
+	   MY_EMPTY_STRING_ARRAY1 = "http://www.google.com";	   
+	   UrlValidator urlVal = new UrlValidator(null, null, allowAllSchemes);
+	   assertTrue(urlVal.isValid(MY_EMPTY_STRING_ARRAY1));
+
+	   // testing Go URL without: / 
+	   public static final String[] MY_EMPTY_STRING_ARRAY2 = new String[0]; 
+	   MY_EMPTY_STRING_ARRAY2 = "http://go.com";	   
+	   UrlValidator urlVal = new UrlValidator(null, null, allowAllSchemes);
+	   assertTrue(urlVal.isValid(MY_EMPTY_STRING_ARRAY2));	        	   
+   }
+   
+      //You need to create more test cases for your Partitions if you need to 
+   public void testIsValid(Object[] testObjects, long allowAllSchemes)  
+   {
+   // You can use this function for programming based testing
+   // Valid URLs from studying this file provided by professor:
+   // https://github.com/cs362-004/CS362-004-F2018/blob/master/FinalProject/URLValidatorCorrect/test/UrlValidatorTest.java
+	     	UrlValidator urlVal = new UrlValidator(null, null, allowAllSchemes);
+	      	// UrlValidator urlVal = new UrlValidator(null, allowAllSchemes);
+      		assertTrue(urlVal.isValid("http://www.google.com"));
+      		assertTrue(urlVal.isValid("http://www.google.com/"));
+      		assertTrue(urlVal.isValid("http://go.com"));
+      		assertTrue(urlVal.isValid("http://go.com/"));
+      		assertTrue(urlVal.isValid("http://go.au"));		
+      		assertTrue(urlVal.isValid("http://go.au/"));        
+   }
