@@ -1,6 +1,7 @@
 // From 2.2 Program Outline in Program 2
 // NOTE: I am showing the steps to writing Program 2
-//       Step 1:
+//       Step 5:
+//       On Assignment 2, page 3, it was recommended that this outline can help
 //       The following code was given to all students in the Lecture 2.2
 // From reading 2.2, I am collecting specs and information for the program
 
