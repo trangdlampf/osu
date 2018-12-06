@@ -1,4 +1,7 @@
 /* STEP 3.2
+// Found: C Prog for absolute beginner on pdfdrive.c- -
+//        pdfdrive.com/c-programming-for-the-absolute-beginner-second-edition-d21732003.h- - -
+
    After reading 2.2 Manipulating Directories and https://linux.die.net/man/3/opendir  
     I needed to under each concept or line of code better.
 	So, I did some google searches and came up with this:
