@@ -1,0 +1,40 @@
+/* THIS IS FOR STUDY PURPOSES 
+   Step 3:
+   From 2.4 Manipulating Directories
+*/
+
+/* cat hellodirectory.c */
+#include <stdio.h>
+#include <sys/stat.h>
+int main()
+{
+int result = mkdir("newdir", 0755);
+printf("Result of mkdir(): %d\n", result);
+return 0;
+}
+
+/* THIS SHOWS THE RESULTS
+$ gcc -o hellodirectory hellodirectory.c
+$ ls -pla
+total 12
+drwxrwx---. 1 brewsteb upg57541 144 Mar 16 16:18 ./
+drwxrwx---. 1 brewsteb upg57541 1744 Mar 16 16:11 ../
+-rwxrwx---. 1 brewsteb upg57541 8565 Mar 16 16:18 hellodirectory
+-rw-rw----. 1 brewsteb upg57541 151 Feb 10 09:54 hellodirectory.c
+$ hellodirectory
+Result of mkdir(): 0
+$ ls -pla
+total 12
+drwxrwx---. 1 brewsteb upg57541 144 Mar 16 16:19 ./
+drwxrwx---. 1 brewsteb upg57541 1744 Mar 16 16:11 ../
+-rwxrwx---. 1 brewsteb upg57541 8565 Mar 16 16:18 hellodirectory
+-rw-rw----. 1 brewsteb upg57541 151 Feb 10 09:54 hellodirectory.c
+drwxr-x---. 1 brewsteb upg57541 0 Mar 16 16:19 newdir/
+
+------------------------------------------------------
+
+So, if I want to create a new directory with the name "trangFolder", the code is:
+   int result = mkdir("trangFolder", 0755);
+The result would look something like this:
+drwxr-x---. 1 lamtr upg57541 0 Mar 16 16:19 trangFolder/
+*/
