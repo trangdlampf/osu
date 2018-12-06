@@ -1,0 +1,129 @@
+/* STEP 3.2
+   After reading 2.2 Manipulating Directories and https://linux.die.net/man/3/opendir  
+    I needed to under each concept or line of code better.
+	So, I did some google searches and came up with this:
+		https://www.thegeekstuff.com/2012/06/c-directory/
+
+		I also studied:
+		http://www.pas.rochester.edu/~pavone/particle-www/telescopes/ComputerCommands.htm
+		(see lines 70+) 
+		
+		I also studied:
+		http://www.tutorialspoint.com/unix_system_calls/mkdir.htm
+		
+		I also studied this example with an explanation:
+		https://www.geeksforgeeks.org/c-program-list-files-sub-directories-directory/
+		
+		This is an online compiler that helps me check syntax:
+		https://www.onlinegdb.com/online_c_compiler
+		
+	NOTE: Notes from From geekstuff:
+	From the I broke out several concepts/ideas.
+		
+    1. Creating directories.
+    2. Reading directories.
+    3. Removing directories.
+    4. Closing the directory.
+    5. Getting the current working directory.
+
+    1. Creating directories.
+	
+		#include <sys/stat.h>
+		#include <sys/types.h>
+		int mkdir(const char *pathname, mode_t mode);	
+
+    2. Reading directories.
+	2A. Open a directory.
+	
+		#include <sys/types.h>
+		#include <dirent.h>
+		DIR *opendir(const char *name);
+		
+	2B. Read a directory.
+
+	#include // QUESTION: is this supposed to read as 1 line? Or is it: #include <dirent.h>
+	struct dirent *readdir(DIR *dirp);
+
+	2C. I also need a struct titled dirent like below:
+
+		struct dirent
+		{
+			ino_t          d_ino;       /* inode number */
+			off_t          d_off;       /* offset to the next dirent */
+			unsigned short d_reclen;    /* length of this record */
+			unsigned char  d_type;      /* type of file; not supported
+										   by all file system types */
+			char           d_name[256]; /* filename */
+		};		
+	
+    3. Removing directories.
+	
+		#include <unistd.h>
+		int rmdir(const char *pathname);	
+	
+    4. Closing the directory.
+
+		#include <sys/types.h>
+		#include <dirent.h>
+		int closedir(DIR *dirp);
+
+    5. Getting the current working directory.	
+
+		#include <unistd.h>
+		char *getcwd(char *buf, size_t size);
+		
+	------------------------------------------
+	From pas.rochester
+	--- Making or Removing a Directory (terminal mode) ---
+	mkdir dirName   	Creates a directory with name dirName.
+
+	For Example:
+	mkdir temp			Creates the directory temp.
+
+	rmdir dirName      	Removes a directory dirName.
+	For Example:
+	rmdir temp          Removes the directory temp.
+
+	------------------------------------------
+	
+	// from GeeksforGeeks
+	#include <stdio.h> 
+	#include <dirent.h> 
+	  
+	int main(void) 
+	{ 
+		struct dirent *de;  // Pointer for directory entry 
+	  
+		// opendir() returns a pointer of DIR type.  
+		DIR *dr = opendir("."); 
+	  
+		if (dr == NULL)  // opendir returns NULL if couldn't open directory 
+		{ 
+			printf("Could not open current directory" ); 
+			return 0; 
+		} 
+	  
+		// Refer http://pubs.opengroup.org/onlinepubs/7990989775/xsh/readdir.html 
+		// for readdir() 
+		while ((de = readdir(dr)) != NULL) 
+				printf("%s\n", de->d_name); 
+	  
+		closedir(dr);     
+		return 0; 
+	} 
+	
+	=========================================
+	// MY CODE
+	
+	/* cat myTrangDir.c */
+	#include <stdio.h>
+	#include <sys/stat.h>
+	int main()
+	{
+	int result = mkdir("myTrang", 0755);
+	printf("Result of mkdir(): %d\n", result);
+	return 0;
+}
+	/* output should have a directory/folder titled: myTrang */
+	
+*/
